@@ -1,0 +1,124 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <https://n2t.net/ark:57802/2021/08/marda-phonons/> .
+
+<https://n2t.net/ark:57802/2021/08/marda-phonons> a skos:ConceptScheme ;
+    dct:title "MaRDA Phonons Data Dictionary" ;
+    rdfs:seeAlso <https://www.marda-alliance.org/portfolio-item/wg-5-data-dictionaries-working-group/> ;
+    dct:created "2021-08-08" .
+
+
+:metadata a skos:Collection ;
+    skos:definition "Metadata of the material" ;
+    skos:member
+        :material_id ,
+        :formula ,
+        :structure ,
+        :kpoints_grid ,
+        :kpoints_shifts ,
+        :qpoints_grid ,
+        :cutoff ,
+        :pseudopotential_md5 ,
+        :point_group ,
+        :space_group ,
+        :nsites .
+
+:material_id a owl:DatatypeProperty ;
+    skos:prefLabel "material ID" ;
+    skos:definition "Materials Project (MP) ID number" ;
+    rdfs:range xsd:string .
+
+:formula a owl:DatatypeProperty ;
+    skos:prefLabel "chemical formula" ;
+    skos:definition "reduced chemical formula" ;
+    rdfs:range xsd:string .
+
+:structure a owl:DatatypeProperty ;
+    skos:prefLabel "crystal structure" ;
+    skos:definition "Crystal structure in Crystallographic Information File (CIF) format" ;
+    rdfs:range xsd:string .
+
+:kpoints_grid a owl:ObjectProperty ;
+    skos:prefLabel "k-points grid" ;
+    skos:definition "List of integers describing the regular grid of k-points" ;
+    rdfs:range rdf:List .
+
+:kpoints_shifts a owl:ObjectProperty ;
+    skos:prefLabel "k-points shifts" ;
+    skos:definition "List of shifts used in the ABINIT-specific format" ;
+    rdfs:range rdf:List .
+
+:qpoints_grid a owl:ObjectProperty ;
+    skos:prefLabel "q-points grid" ;
+    skos:definition "List of integers describing the regular grid of q-points" ;
+    rdfs:range rdf:List .
+
+:cutoff a owl:ObjectProperty ;
+    skos:prefLabel "Plane wave cutoff (Ha)" ;
+    skos:definition "Plane wave cutoff (Ha)" ;
+    rdfs:range [ a qudt:ConstantValue; qudt:unit unit:E_h ] .
+
+:pseudopotential_md5 a owl:ObjectProperty ;
+    skos:prefLabel "pseodopotential MD5 hashes" ;
+    skos:definition "List of MD5 hashes uniquely identifying the pseudopotentials" ;
+    rdfs:range rdf:List .
+
+:point_group a owl:DatatypeProperty ;
+    skos:prefLabel "point group" ;
+    skos:definition "Point group in Hermann-Mauguin notation" ;
+    rdfs:range xsd:string .
+
+:space_group a owl:DatatypeProperty ;
+    skos:prefLabel "space group" ;
+    skos:definition "Space group number as defined by the International Union of Crystallography" ;
+    rdfs:range xsd:nonNegativeInteger .
+
+:nsites a owl:DatatypeProperty ;
+    skos:prefLabel "# sites" ;
+    skos:altLabel "nsites" ;
+    skos:definition "Number of atoms in the primitive cell" ;
+    rdfs:range xsd:nonNegativeInteger .
+
+
+:phonon a skos:Collection ;
+    skos:definition "Phonon properties" ;
+    skos:member
+        :ph_bandstructure ,
+        :qpts ,
+        :ph_dos ,
+        :dos_frequencies ,
+        :asr_breaking .
+
+
+:thermo a skos:Collection ;
+    skos:definition "Thermodynamic properties" ;
+    skos:member
+        :temperature ,
+        :entropy ,
+        :C_v ,
+        :helmholtz_energy ,
+        :phonon_energy .
+
+
+:dielectric a skos:Collection ;
+    skos:definition "Dielectric properties and Born effective charges (BECs)" ;
+    skos:member
+        :becs ,
+        :eps_electronic ,
+        :eps_total ,
+        :cnsr_breaking .
+
+
+:flags a skos:Collection ;
+    skos:definition "Flags describing the calculation" ;
+    skos:member
+        :has_neg_fr ,
+        :large_asr_break ,
+        :large_cnsr_break ,
+        :small_q_neg_fr .
